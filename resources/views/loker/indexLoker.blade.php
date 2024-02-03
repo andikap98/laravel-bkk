@@ -99,27 +99,40 @@
                     </div>
                 @endif
                 <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
+                    <div class="col-sm-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <div class="button"><a class="btn btn-success m-2" href="{{route('jurusan.create')}}">+ Tambah Data</a></div>
-                            <table class="table table-borderless">
+                            <div class="button"><a class="btn btn-success m-2" href="{{route('loker.create')}}">+ Tambah Data</a></div>
+                            <table class="table table-borderless" id="example">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
-                                        <th scope="col" class="text-center">Nama Jurusan</th>
-                                        <th scope="col" class="text-center">Action</th>
+                                        <th scope="col" class="text-center">Nama Perusahaan</th>
+                                        <th scope="col" class="text-center">Pekerjaan</th>
+                                        <th scope="col" class="text-center">Batas Pendaftaran</th>
+                                        <th scope="col" class="text-center">Status</th>
+                                        <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($jurusan as $index=>$item)
-                                        
+                                    @foreach ($loker as $index=>$item)
                                     <tr>
                                         <td scope="row">{{$index+1}}</td>
-                                        <td class="text-center">{{$item->nama_jurusan}}</td>
+                                        <td class="text-center">{{$item->nama_perusahaan}}</td>
+                                        <td class="text-center">{{$item->jenis_pekerjaan}}</td>
+                                        <td class="text-center">{{$item->batas_waktu_pendaftaran}}</td>
+                                        <td class="text-center">
+                                            @if ($item->status == "buka")
+                                                <span class="badge text-bg-success">Buka</span>
+                                            @elseif($item->status == "tutup")
+                                                <span class="badge text-bg-danger">Tutup</span>
+                                            @else
+                                                <span class="badge text-bg-secondary">Kadaluarsa</span>
+                                            @endif
+                                        </td>
                                         <td class="text center">
-                                           <div class="d-flex justify-content-center align-items-center">
-                                                <a href="{{ route('jurusan.edit', $item->id) }}" class="btn btn-primary m-2">Edit</a>
-                                                <form action="{{ route('jurusan.destroy', $item->id) }}" method="POST">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <a href="{{route('loker.edit', $item->id)}}" class="btn btn-primary m-2">Edit</a>
+                                                <form action="" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger m-2">Delete</button>
@@ -135,7 +148,4 @@
                 </div>
             </div>
             <!-- Table End -->
-
-
-        
 @endsection

@@ -12,7 +12,8 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        return view('jurusan.index');
+        $jurusan = Jurusan::all();
+        return view('jurusan.index', ['jurusan'=>$jurusan]);
     }
 
     /**
@@ -52,7 +53,7 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        //
+        return view('jurusan.editJurusan', compact('jurusan'));
     }
 
     /**
@@ -60,7 +61,16 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        //
+        $request->validate([
+
+            'nama_jurusan'=>'required'
+        ]);
+
+        $jurusan->update([
+            'nama_jurusan' => $request->input('nama_jurusan')
+        ]);
+
+        return redirect()->route('jurusan.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -68,6 +78,7 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        //
+        $jurusan->delete();
+        return redirect()->route('jurusan.index')->with('success', 'Data berhasil dihapus');
     }
 }

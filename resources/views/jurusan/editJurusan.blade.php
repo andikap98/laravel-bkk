@@ -89,53 +89,23 @@
                 </div>
             </nav>
             <!-- Navbar End -->
-
-
-            <!-- Table Start -->
+           
             <div class="container-fluid pt-4 px-4">
-                @if (session('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session ('success')}}
-                    </div>
-                @endif
                 <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
+                    <div class="col-sm-12">
+                        <form action="{{route('jurusan.update', $jurusan->id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="bg-light rounded h-100 p-4">
-                            <div class="button"><a class="btn btn-success m-2" href="{{route('jurusan.create')}}">+ Tambah Data</a></div>
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="text-center">#</th>
-                                        <th scope="col" class="text-center">Nama Jurusan</th>
-                                        <th scope="col" class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($jurusan as $index=>$item)
-                                        
-                                    <tr>
-                                        <td scope="row">{{$index+1}}</td>
-                                        <td class="text-center">{{$item->nama_jurusan}}</td>
-                                        <td class="text center">
-                                           <div class="d-flex justify-content-center align-items-center">
-                                                <a href="{{ route('jurusan.edit', $item->id) }}" class="btn btn-primary m-2">Edit</a>
-                                                <form action="{{ route('jurusan.destroy', $item->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger m-2">Delete</button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <h6 class="mb-4">Tambah Data Jurusan</h6>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="nama_jurusan" value="{{$jurusan->nama_jurusan}}" class="form-control" id="floatingInput" placeholder="Nama Jurusan" required>
+                                <label for="floatingInput">Nama Jurusan</label>
+                            </div>
+                            <button type="submit" class="btn btn-success m-2">Update</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <!-- Table End -->
-
-
-        
 @endsection

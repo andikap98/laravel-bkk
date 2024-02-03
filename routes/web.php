@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\JurusanController;                           
+use App\Http\Controllers\LokerController;                           
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('/jurusan', JurusanController::class);
+Route::resource('/loker', LokerController::class);
